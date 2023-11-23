@@ -21,15 +21,11 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-/**
- *
- * @author amanaarmantrading
- */
 public class MyApp1 {
     public static void main(String[] args) {
-        JFrame frame = new JFrame("My App");
+        JFrame frame = new JFrame("MySecApp");
         JTextField textField = new JTextField(20);
-        JButton button = new JButton("Save to XML");
+        JButton button = new JButton("GO");
 
         button.addActionListener((ActionEvent e) -> {
             String text = textField.getText();
@@ -56,4 +52,13 @@ public class MyApp1 {
         frame.setVisible(true);
         }
     }
+
+
+
+
+/**
+ *
+ * @author amanaarmantrading
+ */
+
 
