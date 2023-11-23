@@ -2,40 +2,34 @@ name: Website Scanner
 
 on:
   push:
-    branches:
-      - main
+      paths:
+        -'MyApp1.java'
+     
+  workflow_dispatch:
 
 jobs:
-  scan-website:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Retrieve URL from GitHub
-        id: get-url
-        run: |
-          URL=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-                    https://api.github.com/repos/AmanaOA/Dastardly-Scan-Action/contents/url.txt \
-                    | jq -r '.content' \
-                    | base64 --decode)
-          echo "URL from GitHub: $URL"
-        shell: bash
         
+      - name: Read Target URL from file.xml
+        id: read-target-url
+        run: echo "name=GITHUB_OUTPUT::$(grep -oPm1 "(?<=<userText>)[^<]+" file.xml)"
+      
+      - uses: actions/checkout@v3
       - name: Run Dastardly Action Step
-        continue-on-error: true                        # This allows subsequent steps to run even if this step fails
+        continue-on-error: true                        
         uses: PortSwigger/dastardly-github-action@main
         with:
-          target-url: ${{ steps.get-url.outputs.URL }}
-          env:
-          YOUR_API_KEY: ${{ secrets.YOUR_API_KEY }}
-    
-      # You can replace this next step with any JUnit XML parser of your choosing
+          target-url: ${{ steps.read-target-url.outputs.url }}    
+
       - name: Publish Test Report
-        if: always()                                   
+        if: always()                                    
         uses: mikepenz/action-junit-report@v3
         with:
-          report_paths: '**/dastardly-report.xml'       
+          report_paths: '**/dastardly-report.xml'   
           require_tests: true
-
      
