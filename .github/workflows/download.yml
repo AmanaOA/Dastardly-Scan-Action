@@ -1,0 +1,17 @@
+name: Download 
+
+on:
+  push:
+    branches: 
+    - AmanaOA-patch-3
+
+jobs:
+  build:
+    runs-on: ubuntu-lastest
+  
+    steps:
+    - name: Download Test Report
+      uses: actions/download-artifact@v2
+      with:
+        name: test-reports
+        path: test-reports
