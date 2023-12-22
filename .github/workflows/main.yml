@@ -20,7 +20,7 @@ jobs:
         continue-on-error: true                        # This allows subsequent steps to run even if this step fails
         uses: PortSwigger/dastardly-github-action@main
         with:
-          target-url: 'https://uk.pd.claranet.com/pen-testing-quote?gclid=EAIaIQobChMI7-i5tKyjgwMV15tQBh31kgDPEAAYASAAEgJYYvD_BwE'
+          target-url: 'https://metaleks.com/'
 
   # You can replace this next step with any JUnit XML parser of your choosing
       - name: Publish Test Report
