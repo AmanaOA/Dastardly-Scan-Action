@@ -20,7 +20,7 @@ jobs:
         continue-on-error: true                        # This allows subsequent steps to run even if this step fails
         uses: PortSwigger/dastardly-github-action@main
         with:
-          target-url: 'https://exploit-0a4b0063033415d5806ba7e6010900cb.exploit-server.net/exploit'
+          target-url: 'https://0ac70032034f223180323f7300f900c9.web-security-academy.net/product?productId=1'
 
   # You can replace this next step with any JUnit XML parser of your choosing
       - name: Publish Test Report
